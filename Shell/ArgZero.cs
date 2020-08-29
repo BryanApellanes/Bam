@@ -34,7 +34,7 @@ namespace Bam.Shell
             {
                 MethodInfo registered = Targets[arg];
                 string willUse = $"{registered.DeclaringType.Name}.{registered.Name}";
-                OutLineFormat("The specified ArgZero is already registered {0}, will use {1}", ConsoleColor.Yellow, arg, willUse);
+                Message.PrintLine("The specified ArgZero is already registered {0}, will use {1}", ConsoleColor.Yellow, arg, willUse);
             }
         }
 
@@ -88,8 +88,7 @@ namespace Bam.Shell
                 string name = extender.Name;
                 if (!extender.Name.EndsWith("Provider"))
                 {
-                    OutLineFormat("For clarity and convention, the name of type {0} should end with 'Provider'",
-                        ConsoleColor.Yellow);
+                    Message.PrintLine("For clarity and convention, the name of type {0} should end with 'Provider'", ConsoleColor.Yellow);
                 }
                 else
                 {
@@ -115,8 +114,7 @@ namespace Bam.Shell
                 string name = type.Name;
                 if (!type.Name.EndsWith("Provider"))
                 {
-                    OutLineFormat("For clarity and convention, the name of type {0} should end with 'Provider'",
-                        ConsoleColor.Yellow);
+                    Message.PrintLine("For clarity and convention, the name of type {0} should end with 'Provider'", ConsoleColor.Yellow);
                 }
                 else
                 {
@@ -155,7 +153,7 @@ namespace Bam.Shell
                 Pause("Press enter to continue");
             }
 
-            onArgZeroExecuted = onArgZeroExecuted ?? (() => { });
+            onArgZeroExecuted ??= (() => { });
             
             if (Targets.ContainsKey(arguments[0]))
             {
@@ -193,7 +191,7 @@ namespace Bam.Shell
                 }
                 catch (Exception ex)
                 {
-                    OutLineFormat("Exception executing ArgZero: {0}", ConsoleColor.Magenta, ex.Message);
+                    Message.PrintLine("Exception executing ArgZero: {0}", ConsoleColor.Magenta, ex.Message);
                 }
 
                 onArgZeroExecuted();
@@ -207,8 +205,8 @@ namespace Bam.Shell
             string argZeroAssemblyFolders = config.AppSettings["ArgZeroAssemblyFolders"].Or($".,{arg0DirPath}");
             string argZeroScanPattern = config.AppSettings["ArgZeroScanPattern"].Or("*-arg0.dll");
 
-            string[] assemlbyFolderPaths = argZeroAssemblyFolders.DelimitSplit(",");
-            foreach (string assemblyFolderPath in assemlbyFolderPaths)
+            string[] assemblyFolderPaths = argZeroAssemblyFolders.DelimitSplit(",");
+            foreach (string assemblyFolderPath in assemblyFolderPaths)
             {
                 foreach (Assembly assembly in FindAssemblies(new DirectoryInfo(assemblyFolderPath), argZeroScanPattern))
                 {

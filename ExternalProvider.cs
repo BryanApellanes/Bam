@@ -22,7 +22,7 @@ namespace Bam.Net.Application
         [ArgZero("menu")]
         public void Menu()
         {
-            FileInfo file = typeof(Adhoc.Adhoc).Assembly.GetFileInfo();
+            FileInfo file = typeof(Bam.Net.Adhoc.Adhoc).Assembly.GetFileInfo();
             string assemblyPath = file.FullName;
             if (Arguments.Contains("assembly"))
             {

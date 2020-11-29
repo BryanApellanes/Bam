@@ -25,7 +25,7 @@ namespace Bam.Net.Application
             string smtpSettingsFile = GetArgument("setLocalSmtpSettings", "Please enter the path to the smtp settings json file");
             if (!File.Exists(smtpSettingsFile))
             {
-                OutLineFormat("Specified smtp settings file doesn't exist: {0}", ConsoleColor.Magenta, smtpSettingsFile);
+                Message.PrintLine("Specified smtp settings file doesn't exist: {0}", ConsoleColor.Magenta, smtpSettingsFile);
                 return;
             }
             SmtpSettings settings = smtpSettingsFile.FromJsonFile<SmtpSettings>();

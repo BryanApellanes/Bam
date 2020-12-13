@@ -5,7 +5,7 @@
     <ApplicationIcon>bam.ico</ApplicationIcon>
     <StartupObject>Bam.Net.Program</StartupObject>
     <PackageId>bam</PackageId>
-    <Version>1.0.5-test+b340e1c</Version>
+    <Version>1.0.5-test+bda5ffb</Version>
     <Authors>Bryan Apellanes</Authors>
     <Company>ThreeHeadz</Company>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -270,6 +270,5 @@
     <ProjectReference Include="..\..\..\Bam.Net\_lib\bam.net.core\bam.net.core.csproj" />
     <ProjectReference Include="..\..\..\Bam.Net\_lib\bam.net.data.dynamic\bam.net.data.dynamic.csproj" />
     <ProjectReference Include="..\..\..\BamAppServices\_tools\bambot\bambot.csproj" />
-
   </ItemGroup>
 </Project>

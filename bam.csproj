@@ -5,10 +5,15 @@
     <ApplicationIcon>bam.ico</ApplicationIcon>
     <StartupObject>Bam.Net.Program</StartupObject>
     <PackageId>bam</PackageId>
-    <Version>1.0.5-test+2d5ca0a</Version>
+    <Version>1.0.5-test+bda5ffb</Version>
     <Authors>Bryan Apellanes</Authors>
     <Company>ThreeHeadz</Company>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <NoPackageAnalysis>true</NoPackageAnalysis>
+    <NuspecFile>bam.nuspec</NuspecFile>
+    <IntermediatePackDir>$(MSBuildProjectDirectory)/bin/$(Configuration)/</IntermediatePackDir>
+    <PublishDir>$(IntermediatePackDir)$(TargetFramework)/</PublishDir>
+    <NuspecProperties>publishDir=$([MSBuild]::NormalizeDirectory($(IntermediatePackDir)))</NuspecProperties>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>bin\Debug\</OutputPath>
@@ -271,4 +276,10 @@
     <ProjectReference Include="..\..\..\Bam.Net\_lib\bam.net.data.dynamic\bam.net.data.dynamic.csproj" />
     <ProjectReference Include="..\..\..\BamAppServices\_tools\bambot\bambot.csproj" />
   </ItemGroup>
+  <Target Name="PublishAll" BeforeTargets="GenerateNuspec">
+    <ItemGroup>
+      <_TargetFramework Include="$(TargetFrameworks)" />
+      <MSBuild Projects="$(MSBuildProjectFullPath)" Targets="Publish" Properties="TargetFramework=%(_TargetFramework.Identity)" />
+    </ItemGroup>
+  </Target>
 </Project>

@@ -29,9 +29,9 @@ namespace Bam.Shell
         public void Config()
         {
             BamSettings settings = BamSettings.Load();
-            if(!settings.IsValid(msgs => OutLine(msgs, ConsoleColor.Magenta)))
+            if(!settings.IsValid(msgs => Message.PrintLine(msgs, ConsoleColor.Magenta)))
             {
-                settings.Save(bak => OutLineFormat("Backed up existing file: {0}", ConsoleColor.DarkYellow, bak));
+                settings.Save(bak => Message.PrintLine("Backed up existing file: {0}", ConsoleColor.DarkYellow, bak));
             }            
         }
 
@@ -62,7 +62,7 @@ namespace Bam.Shell
                 "Please enter the name of the class containing the cli switch to execute");
             if (!File.Exists(assemblyPath))
             {
-                OutLineFormat("Specified assembly does not exist: {0}", ConsoleColor.Magenta, assemblyPath);
+                Message.PrintLine("Specified assembly does not exist: {0}", ConsoleColor.Magenta, assemblyPath);
                 Exit(1);
             }
 
@@ -75,7 +75,7 @@ namespace Bam.Shell
                     .FirstOrDefault(t => $"{t.Namespace}.{t.Name}".Equals(className) || className.Equals(t.Name));
                 if (targetType == null)
                 {
-                    OutLineFormat("Specified class was not found in the specified assembly: className = {0}", ConsoleColor.Magenta, className);
+                    Message.PrintLine("Specified class was not found in the specified assembly: className = {0}", ConsoleColor.Magenta, className);
                     Exit(1);
                 }
             }

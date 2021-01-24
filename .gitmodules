@@ -1,0 +1,3 @@
+[submodule "npm/bam_js"]
+	path = npm/bam_js
+	url = git@github.com:BryanApellanes/bam.js.git

@@ -43,7 +43,7 @@ namespace Bam.Net.Application
             }
             else
             {
-                OutLineFormat("{0} signed up successfully", info.Email);
+                Message.PrintLine("{0} signed up successfully", info.Email);
             }
         }
 
@@ -53,7 +53,7 @@ namespace Bam.Net.Application
             string applicationName = GetArgument("registerApplication");
             if (string.IsNullOrEmpty(applicationName))
             {
-                OutLineFormat("Please specify the name of the application to register: /registerApplication:{applicationName}");
+                Message.PrintLine("Please specify the name of the application to register: /registerApplication:{applicationName}");
                 return;
             }
             
@@ -65,7 +65,7 @@ namespace Bam.Net.Application
             LoginResponse loginResponse = _client.Login(userInfo.Email, userInfo.Password.Sha1());
             if (!loginResponse.Success)
             {
-                OutLineFormat("Log in failed: {0}", ConsoleColor.Yellow, loginResponse.Message);
+                Message.PrintLine("Log in failed: {0}", ConsoleColor.Yellow, loginResponse.Message);
                 return;
             }
         }

@@ -26,7 +26,7 @@ namespace Bam.Shell.Jobs
             set { _jobManagerService = value; }
         }
 
-        public string[] RawArguments { get; private set; }
+        public new string[] RawArguments { get; private set; }
         
         public override void RegisterArguments(string[] args)
         {
@@ -82,7 +82,7 @@ namespace Bam.Shell.Jobs
             }
             catch (Exception ex)
             {
-                OutLineFormat("Error listing workers: {0}", ConsoleColor.Magenta, ex.Message);
+                Message.PrintLine("Error listing workers: {0}", ConsoleColor.Magenta, ex.Message);
                 Exit(1);
             }
         }
@@ -101,12 +101,12 @@ namespace Bam.Shell.Jobs
                 int workerType = SelectFrom(workerTypeNames, "Please select a worker type");
                 JobManagerService.AddWorker(jobName, workerTypeNames[workerType], workerName);
                 
-                OutLineFormat("Added worker {0} to job {1}", ConsoleColor.Cyan, workerName, jobName);
+                Message.PrintLine("Added worker {0} to job {1}", ConsoleColor.Cyan, workerName, jobName);
                 Exit(0);
             }
             catch (Exception ex)
             {
-                OutLineFormat("Error adding worker: {0}", ConsoleColor.Magenta, ex.Message);
+                Message.PrintLine("Error adding worker: {0}", ConsoleColor.Magenta, ex.Message);
                 Exit(1);
             }
         }
@@ -122,11 +122,11 @@ namespace Bam.Shell.Jobs
                     WorkerConf workerConf = jobConf.GetWorkerConf(providerArguments.WorkerName);
                     if (workerConf == null)
                     {
-                        OutLineFormat("Specified worker {0} was not a part of the specified job {1}", providerArguments.WorkerName, providerArguments.JobName);
+                        Message.PrintLine("Specified worker {0} was not a part of the specified job {1}", providerArguments.WorkerName, providerArguments.JobName);
                         Exit(1);
                     }
                     string serialized = Serialize(workerConf);
-                    OutLineFormat("***\r\n{0}\r\n***", ConsoleColor.Blue, serialized);
+                    Message.PrintLine("***\r\n{0}\r\n***", ConsoleColor.Blue, serialized);
                 }
                 else
                 {
@@ -137,14 +137,14 @@ namespace Bam.Shell.Jobs
                         stringBuilder.AppendLine(key);
                         stringBuilder.AppendLine(Serialize(jobConf.WorkerConfs[key]));
                     }
-                    OutLineFormat("***\r\n{0}\r\n***", stringBuilder.ToString());
+                    Message.PrintLine("***\r\n{0}\r\n***", stringBuilder.ToString());
                 }
                 
                 Exit(0);
             }
             catch (Exception ex)
             {
-                OutLineFormat("error showing worker: {0}", ConsoleColor.Magenta, ex.Message);
+                Message.PrintLine("error showing worker: {0}", ConsoleColor.Magenta, ex.Message);
                 Exit(1);
             }
         }
@@ -158,16 +158,16 @@ namespace Bam.Shell.Jobs
                 WorkerConf worker = jobConf.GetWorkerConf(providerArguments.WorkerName);
                 if (worker == null)
                 {
-                    OutLineFormat("Specified worker {0} was not a part of the specified job {1}", providerArguments.WorkerName, providerArguments.JobName);
+                    Message.PrintLine("Specified worker {0} was not a part of the specified job {1}", providerArguments.WorkerName, providerArguments.JobName);
                     Exit(1);
                 }
                 jobConf.RemoveWorker(providerArguments.WorkerName);
-                OutLineFormat("Removed worker {0}", ConsoleColor.Yellow, providerArguments.WorkerName);
+                Message.PrintLine("Removed worker {0}", ConsoleColor.Yellow, providerArguments.WorkerName);
                 Exit(0);
             }
             catch (Exception ex)
             {
-                OutLineFormat("error removing worker: {0}", ConsoleColor.Magenta, ex.Message);
+                Message.PrintLine("error removing worker: {0}", ConsoleColor.Magenta, ex.Message);
                 Exit(1);
             }
         }
@@ -185,7 +185,7 @@ namespace Bam.Shell.Jobs
             }
             catch (Exception ex)
             {
-                OutLineFormat("error running worker: {0}", ConsoleColor.Magenta, ex.Message);
+                Message.PrintLine("error running worker: {0}", ConsoleColor.Magenta, ex.Message);
                 Exit(1);
             }
         }
@@ -199,7 +199,7 @@ namespace Bam.Shell.Jobs
                 WorkerConf workerConf = jobConf.GetWorkerConf(providerArguments.WorkerName, true);
                 if (workerConf == null)
                 {
-                    OutLineFormat("specified worker was not found: {0}", providerArguments.WorkerName);
+                    Message.PrintLine("specified worker was not found: {0}", providerArguments.WorkerName);
                     Exit(1);
                 }
 
@@ -209,7 +209,7 @@ namespace Bam.Shell.Jobs
             }
             catch (Exception ex)
             {
-                OutLineFormat("error editing worker: {0}", ConsoleColor.Magenta, ex.Message);
+                Message.PrintLine("error editing worker: {0}", ConsoleColor.Magenta, ex.Message);
                 Exit(1);
             }
         }
@@ -219,7 +219,7 @@ namespace Bam.Shell.Jobs
             JobConf jobConf = JobManagerService.GetJob(jobName, false);
             if (jobConf == null)
             {
-                OutLineFormat("The specified job was not found: {0}", ConsoleColor.Magenta, jobName);
+                Message.PrintLine("The specified job was not found: {0}", ConsoleColor.Magenta, jobName);
                 Exit(1);
             }
 
@@ -228,7 +228,7 @@ namespace Bam.Shell.Jobs
         
         private void PrintMessage()
         {
-            OutLineFormat("Jobs directory: {0}", ConsoleColor.Yellow, JobManagerService.JobsDirectory);
+            Message.PrintLine("Jobs directory: {0}", ConsoleColor.Yellow, JobManagerService.JobsDirectory);
         }
     }
 }

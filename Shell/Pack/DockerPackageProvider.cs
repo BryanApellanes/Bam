@@ -30,13 +30,13 @@ namespace Bam.Shell.Pack
             Environment.CurrentDirectory = startDir;
             if(tagOutput.ExitCode != 0)
             {
-                OutLineFormat("docker tag command failed: {0}\r\n{1}", tagOutput.StandardOutput, tagOutput.StandardError);
+                Message.PrintLine("docker tag command failed: {0}\r\n{1}", tagOutput.StandardOutput, tagOutput.StandardError);
                 Exit(1);
             }
             ProcessOutput pushOutput = settings.DockerPath.ToStartInfo("push bamapps/containers:{projectName}").Run(msg => OutLine(msg, ConsoleColor.DarkCyan));
             if (tagOutput.ExitCode != 0)
             {
-                OutLineFormat("docker push command failed: {0}\r\n{1}", tagOutput.StandardOutput, tagOutput.StandardError);
+                Message.PrintLine("docker push command failed: {0}\r\n{1}", tagOutput.StandardOutput, tagOutput.StandardError);
                 Exit(1);
             }
         }        

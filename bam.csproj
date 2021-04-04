@@ -16,7 +16,7 @@
     <NuspecProperties>publishDir=$([MSBuild]::NormalizeDirectory($(IntermediatePackDir)))</NuspecProperties>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>\opt\bam\build\bam\debug\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <None Update="BamSettings-Windows.yaml">

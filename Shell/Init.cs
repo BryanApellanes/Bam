@@ -34,7 +34,7 @@ namespace Bam.Shell
             Message.PrintLine("ApplicationName = {0}", ConsoleColor.DarkBlue, applicationName);
 
             string bamHome = BamEnvironmentVariables.Home();
-            OutLineFormat("BAM_HOME = {0}", ConsoleColor.DarkBlue, bamHome);
+            Message.PrintLine("BAM_HOME = {0}", ConsoleColor.DarkBlue, bamHome);
             // create a directory in {{bamHome}}/content/apps/{{applicationName}}
             DirectoryInfo appHome = new DirectoryInfo(Path.Combine(bamHome, "content", "apps", applicationName));
             if (!appHome.Exists)
@@ -124,7 +124,7 @@ namespace Bam.Shell
             string bamJsPath = Path.Combine(wwwroot.FullName, "bam.js");
             if (!Directory.Exists(bamJsPath))
             {
-                OutLineFormat("Cloning bam.js to {0}", ConsoleColor.Yellow, bamJsPath);
+                Message.PrintLine("Cloning bam.js to {0}", ConsoleColor.Yellow, bamJsPath);
                 ProcessStartInfo cloneCommand =
                     settings.GitPath.ToStartInfo("clone https://github.com/BryanApellanes/bam.js.git wwwroot/bam.js");
                 cloneCommand.Run(msg => OutLine(msg, ConsoleColor.DarkCyan));
@@ -147,13 +147,13 @@ namespace Bam.Shell
                 string moduleContent = handlebarsDirectory.Render($"{moduleType}.cs", model);
                 if (string.IsNullOrEmpty(moduleContent))
                 {
-                    OutLineFormat("{0}: Template for {1} is empty", handlebarsDirectory.Directory.FullName, moduleType);
+                    Message.PrintLine("{0}: Template for {1} is empty", handlebarsDirectory.Directory.FullName, moduleType);
                 }
                 string filePath = Path.Combine(appModules.FullName, $"{appName}{moduleType}.cs");
                 if (!File.Exists(filePath))
                 {
                     moduleContent.SafeWriteToFile(filePath, true);
-                    OutLineFormat("Wrote file {0}...", ConsoleColor.Green, filePath);
+                    Message.PrintLine("Wrote file {0}...", ConsoleColor.Green, filePath);
                 }
             }            
         }
@@ -161,16 +161,19 @@ namespace Bam.Shell
         private static void WriteStartupCs(FileInfo csprojFile)
         {
             DirectoryInfo projectParent = csprojFile.Directory;
-            FileInfo startupCs = new FileInfo(Path.Combine(projectParent.FullName, "Startup.cs"));
-            if (startupCs.Exists)
+            if (projectParent != null)
             {
-                string moveTo = startupCs.FullName.GetNextFileName();
-                File.Move(startupCs.FullName, moveTo);
-                OutLineFormat("Moved existing Startup.cs file to {0}", ConsoleColor.Yellow, moveTo);
-            }
+                FileInfo startupCs = new FileInfo(Path.Combine(projectParent.FullName, "Startup.cs"));
+                if (startupCs.Exists)
+                {
+                    string moveTo = startupCs.FullName.GetNextFileName();
+                    File.Move(startupCs.FullName, moveTo);
+                    Message.PrintLine("Moved existing Startup.cs file to {0}", ConsoleColor.Yellow, moveTo);
+                }
 
-            HandlebarsDirectory handlebarsDirectory = ShellProvider.GetHandlebarsDirectory();
-            handlebarsDirectory.Render("Startup.cs", new { BaseNamespace = Path.GetFileNameWithoutExtension(csprojFile.Name) }).SafeWriteToFile(startupCs.FullName, true);
+                HandlebarsDirectory handlebarsDirectory = ShellProvider.GetHandlebarsDirectory();
+                handlebarsDirectory.Render("Startup.cs", new { BaseNamespace = Path.GetFileNameWithoutExtension(csprojFile.Name) }).SafeWriteToFile(startupCs.FullName, true);
+            }
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Text;
 using Bam.Net;
 using Bam.Net.Automation;
+using Bam.Net.CommandLine;
 using Bam.Net.Data.Repositories;
 
 namespace Bam.Shell.Jobs
@@ -20,7 +21,7 @@ namespace Bam.Shell.Jobs
                 return _jobManagerService; 
                 
             }
-            set { _jobManagerService = value; }
+            set => _jobManagerService = value;
         }
 
         public override void RegisterArguments(string[] args)
@@ -36,7 +37,7 @@ namespace Bam.Shell.Jobs
             return GetProviderArguments(false);
         }
         
-        public string[] RawArguments { get; private set; }
+        public new string[] RawArguments { get; private set; }
         
         protected ProviderArguments GetProviderArguments(bool full = false)
         {
@@ -60,7 +61,7 @@ namespace Bam.Shell.Jobs
             }
             catch (Exception ex)
             {
-                OutLineFormat("Exception listing jobs: {0}", ex.Message);
+                Message.PrintLine("Exception listing jobs: {0}", ex.Message);
                 Exit(1);
             }
 
@@ -82,11 +83,11 @@ namespace Bam.Shell.Jobs
                 JobManagerService.AddWorker(jobName, workerTypes[workerIndex], workerName);
                 JobManagerService.SaveJob(jobConf);
                 OutLine(jobConf.ToYaml(), ConsoleColor.Cyan);
-                OutLineFormat("Created job {0} in directory {1}", ConsoleColor.Cyan, jobConf.Name, jobConf.JobDirectory);
+                Message.PrintLine("Created job {0} in directory {1}", ConsoleColor.Cyan, jobConf.Name, jobConf.JobDirectory);
             }
             catch (Exception ex)
             {
-                OutLineFormat("Exception adding job: {0}", ex.Message);
+                Message.PrintLine("Exception adding job: {0}", ex.Message);
                 Exit(1);
             }
             Exit(0);
@@ -102,12 +103,12 @@ namespace Bam.Shell.Jobs
                 
                 JobConf copy = JobManagerService.CopyJob(jobName,
                     GetArgument("copyName", "Please enter the name of the copy"));
-                OutLine(copy.ToYaml(), ConsoleColor.Cyan);
-                OutLineFormat("Copied job {0} to {1} in directory {2}", ConsoleColor.Cyan, jobName, copy.Name, copy.JobDirectory);
+                Message.PrintLine(copy.ToYaml(), ConsoleColor.Cyan);
+                Message.PrintLine("Copied job {0} to {1} in directory {2}", ConsoleColor.Cyan, jobName, copy.Name, copy.JobDirectory);
             }
             catch (Exception ex)
             {
-                OutLineFormat("Exception copying job: {0}", ex.Message);
+                Message.PrintLine("Exception copying job: {0}", ex.Message);
                 Exit(1);
             }
             Exit(0);
@@ -124,12 +125,12 @@ namespace Bam.Shell.Jobs
                 JobConf jobConf = JobManagerService.RenameJob(jobName,
                     GetArgument("newName", "Please enter the new name to give to the job"));
 
-                OutLine(jobConf.ToYaml(), ConsoleColor.Cyan);
-                OutLineFormat("Renamed job {0} to {1} in directory {2}", ConsoleColor.Cyan, jobName, jobConf.Name, jobConf.JobDirectory);
+                Message.PrintLine(jobConf.ToYaml(), ConsoleColor.Cyan);
+                Message.PrintLine("Renamed job {0} to {1} in directory {2}", ConsoleColor.Cyan, jobName, jobConf.Name, jobConf.JobDirectory);
             }
             catch (Exception ex)
             {
-                OutLineFormat("Exception renaming job: {0}", ex.Message);
+                Message.PrintLine("Exception renaming job: {0}", ex.Message);
                 Exit(1);
             }
             Exit(0);
@@ -151,12 +152,12 @@ namespace Bam.Shell.Jobs
                 else
                 {
                     PrintMessage();
-                    OutLineFormat("Specified job does not exist: {0}", ConsoleColor.Yellow, jobName);
+                    Message.PrintLine("Specified job does not exist: {0}", ConsoleColor.Yellow, jobName);
                 }
             }
             catch (Exception ex)
             {
-                OutLineFormat("Exception getting job: {0}", ex.Message);
+                Message.PrintLine("Exception getting job: {0}", ex.Message);
                 Exit(1);
             }
 
@@ -171,17 +172,17 @@ namespace Bam.Shell.Jobs
                 if(JobManagerService.JobExists(providerArguments.JobName))
                 {
                     JobManagerService.RemoveJob(providerArguments.JobName);
-                    OutLineFormat("Job {0} was deleted", ConsoleColor.Yellow, providerArguments.JobName);
+                    Message.PrintLine("Job {0} was deleted", ConsoleColor.Yellow, providerArguments.JobName);
                 }
                 else
                 {
                     PrintMessage();
-                    OutLineFormat("Specified job doesn't exist: {0}", providerArguments.JobName);
+                    Message.PrintLine("Specified job doesn't exist: {0}", providerArguments.JobName);
                 }
             }
             catch (Exception ex)
             {
-                OutLineFormat("Exception removing job: {0}", ConsoleColor.Magenta, ex.Message);
+                Message.PrintLine("Exception removing job: {0}", ConsoleColor.Magenta, ex.Message);
                 Exit(1);
             }
 
@@ -202,22 +203,22 @@ namespace Bam.Shell.Jobs
                         jobFinished = (args.Cast<WorkStateEventArgs>())?.WorkState?.JobName?.Equals(providerArguments.JobName);
                         if (jobFinished != null && jobFinished.Value == true)
                         {
-                            OutLineFormat("Job {0} finished", ConsoleColor.Cyan, providerArguments.JobName);
+                            Message.PrintLine("Job {0} finished", ConsoleColor.Cyan, providerArguments.JobName);
                             Unblock();
                         }
                     };
                     JobManagerService.StartJob(providerArguments.JobName);
-                    OutLineFormat("Job {0} was queued to start", ConsoleColor.DarkGreen, providerArguments.JobName);
+                    Message.PrintLine("Job {0} was queued to start", ConsoleColor.DarkGreen, providerArguments.JobName);
                     Block();
                 }
                 else
                 {
-                    OutLineFormat("Specified job {0} does not exist", ConsoleColor.Magenta, providerArguments.JobName);
+                    Message.PrintLine("Specified job {0} does not exist", ConsoleColor.Magenta, providerArguments.JobName);
                 }
             }
             catch (Exception ex)
             {
-                OutLineFormat("Exception running job: {0}", ConsoleColor.Magenta, ex.Message);
+                Message.PrintLine("Exception running job: {0}", ConsoleColor.Magenta, ex.Message);
                 Exit(1);
             }
             Exit(0);
@@ -225,7 +226,7 @@ namespace Bam.Shell.Jobs
 
         private void PrintMessage()
         {
-            OutLineFormat("Jobs directory: {0}", ConsoleColor.Yellow, JobManagerService.JobsDirectory);
+            Message.PrintLine("Jobs directory: {0}", ConsoleColor.Yellow, JobManagerService.JobsDirectory);
         }
     }
 }

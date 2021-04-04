@@ -9,7 +9,7 @@ namespace Bam.Shell.Users
 {
     public class RoleProvider: ShellProvider
     {
-        public string[] RawArguments { get; private set; }
+        public new string[] RawArguments { get; private set; }
 
         public override void RegisterArguments(string[] args)
         {

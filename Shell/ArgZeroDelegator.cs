@@ -6,7 +6,7 @@ using Bam.Shell;
 
 namespace Bam.Shell
 {
-    public class ArgZeroDelegator<T> : ArgZeroDelegator
+    public class ArgZeroDelegator<T> : ArgZeroDelegator  // TODO: consider deleting this concept for unnecessary complexity
     {
         public virtual T Construct()
         {

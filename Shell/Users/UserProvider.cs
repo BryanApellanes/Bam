@@ -12,7 +12,7 @@ namespace Bam.Shell.Users
 {
     public class UserProvider : ShellProvider
     {
-        public string[] RawArguments { get; private set; }
+        public new string[] RawArguments { get; private set; }
 
         public override void RegisterArguments(string[] args)
         {
@@ -65,7 +65,7 @@ namespace Bam.Shell.Users
             {
                 return;
             }
-            OutLineFormat("This might not work depending on the state of the user's activity and related data.  Full scrub of user's is not implemented to help ensure data integrity into the future.", ConsoleColor.DarkYellow);
+            Message.PrintLine("This might not work depending on the state of the user's activity and related data.  Full scrub of user's is not implemented to help ensure data integrity into the future.", ConsoleColor.DarkYellow);
             if (!Confirm("Continue?", ConsoleColor.DarkYellow))
             {
                 return;
@@ -74,7 +74,7 @@ namespace Bam.Shell.Users
             User toDelete = User.FirstOneWhere(u => u.Email == email, userDatabase);
             if (toDelete == null)
             {
-                OutLineFormat("Unable to find the user with the email address {0}", ConsoleColor.Magenta, email);
+                Message.PrintLine("Unable to find the user with the email address {0}", ConsoleColor.Magenta, email);
                 return;
             }
 
@@ -85,11 +85,11 @@ namespace Bam.Shell.Users
                     return;
                 }
                 toDelete.Delete(userDatabase);
-                OutLineFormat("User deleted", ConsoleColor.DarkMagenta);
+                Message.PrintLine("User deleted", ConsoleColor.DarkMagenta);
             }
             catch (Exception ex)
             {
-                OutLineFormat("Delete user failed: {0}", ConsoleColor.Magenta, ex.Message);
+                Message.PrintLine("Delete user failed: {0}", ConsoleColor.Magenta, ex.Message);
             }
         }
 

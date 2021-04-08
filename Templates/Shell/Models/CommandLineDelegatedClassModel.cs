@@ -18,16 +18,20 @@ namespace Bam.Templates.Shell.Models
 
         public string Namespace
         {
-            get { return _nameSpace; }
+            get => _nameSpace;
             set
             {
                 _nameSpace = value;
                 SetNamespaces();
             }
         }
+        
         public HashSet<Type> ReferenceTypes { get; set; }
+        
         public ConcreteClassModel ConcreteClass { get; set; }
+        
         public ProviderBaseClassModel ProviderBaseClass { get; set; }
+        
         public DelegatorClassModel DelegatorClass { get; set; }
 
         public void AddReferenceType(Type type)
@@ -74,12 +78,19 @@ namespace Bam.Templates.Shell.Models
         
         public void SetMethods(params string[] methodNames)
         {
-            ConcreteClass.Methods =
-                methodNames.Select(m => new ConcreteMethodModel {ConcreteMethodName = m}).ToArray();
-            ProviderBaseClass.Methods =
-                methodNames.Select(m => new ProviderBaseClassMethodModel {MethodName = m}).ToArray();
-            DelegatorClass.Methods =
-                methodNames.Select(m => new DelegatorMethodModel {MethodName = m}).ToArray();
+            List<ConcreteMethodModel> concreteClassModels = new List<ConcreteMethodModel>();
+            List<ProviderBaseClassMethodModel> providerBaseClassMethodModels = new List<ProviderBaseClassMethodModel>();
+            List<DelegatorMethodModel> delegatorMethodModels = new List<DelegatorMethodModel>();
+            foreach (string methodName in methodNames)
+            {
+                concreteClassModels.Add(new ConcreteMethodModel() {ConcreteMethodName = methodName});
+                providerBaseClassMethodModels.Add(new ProviderBaseClassMethodModel {MethodName = methodName});
+                delegatorMethodModels.Add(new DelegatorMethodModel {MethodName = methodName});
+            }
+
+            ConcreteClass.Methods = concreteClassModels.ToArray();
+            ProviderBaseClass.Methods = providerBaseClassMethodModels.ToArray();
+            DelegatorClass.Methods = delegatorMethodModels.ToArray();
         }
         
         private void SetNamespaces()

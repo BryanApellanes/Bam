@@ -21,7 +21,8 @@ namespace Bam.Shell.ShellGeneration
             ShellGenerationDatabase = DataProvider.Current.GetAppDatabaseFor(ProcessApplicationNameProvider.Current, this);
             ShellGenerationRepository = new DaoRepository(ShellGenerationDatabase)
             {
-                BaseNamespace = typeof(ShellDescriptor).Namespace, RequireCuid = true
+                BaseNamespace = typeof(ShellDescriptor).Namespace, 
+                RequireCuid = true
             };
             ShellGenerationRepository.AddType<ShellDescriptor>();
         }
@@ -29,6 +30,7 @@ namespace Bam.Shell.ShellGeneration
         public Config Config => Config.Current;
 
         public Database ShellGenerationDatabase { get; private set; }
+        
         public DaoRepository ShellGenerationRepository { get; private set; }
 
         public override void RegisterArguments(string[] args)
@@ -47,12 +49,12 @@ namespace Bam.Shell.ShellGeneration
             try
             {
                 ShellGenerationRepository.BatchRetrieveAll(typeof(ShellDescriptor), 1000,
-                sd => { output(sd.ToCsvLine()); });
+                sd => { output?.Invoke(sd.ToCsvLine()); });
             }
             catch (Exception ex)
             {
                 Bam.Net.CommandLine.Message.PrintLine("{0}", ConsoleColor.DarkRed, ex.Message);
-                error(ex.Message);
+                error?.Invoke(ex.Message);
                 Exit(1);
             }
         }

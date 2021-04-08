@@ -16,7 +16,10 @@
     <NuspecProperties>publishDir=$([MSBuild]::NormalizeDirectory($(IntermediatePackDir)))</NuspecProperties>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>\opt\bam\build\bam\debug\</OutputPath>
+    <OutputPath>\opt\bam\build\debug\bam\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>\opt\bam\build\release\bam\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <None Update="BamSettings-Windows.yaml">

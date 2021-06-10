@@ -5,7 +5,7 @@
     <ApplicationIcon>bam.ico</ApplicationIcon>
     <StartupObject>Bam.Net.Program</StartupObject>
     <PackageId>bam</PackageId>
-    <Version>1.0.5-test+d1d6b3d</Version>
+    <Version>1.0.6-test+2b3c534</Version>
     <Authors>Bryan Apellanes</Authors>
     <Company>ThreeHeadz</Company>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -278,6 +278,9 @@
     <ProjectReference Include="..\..\..\Bam.Net\_lib\bam.net.core\bam.net.core.csproj" />
     <ProjectReference Include="..\..\..\Bam.Net\_lib\bam.net.data.dynamic\bam.net.data.dynamic.csproj" />
     <ProjectReference Include="..\..\..\BamAppServices\_tools\bambot\bambot.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Shell\" />
   </ItemGroup>
   <Target Name="PublishAll" BeforeTargets="GenerateNuspec">
     <ItemGroup>

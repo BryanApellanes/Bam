@@ -5,7 +5,7 @@
     <ApplicationIcon>bam.ico</ApplicationIcon>
     <StartupObject>Bam.Net.Program</StartupObject>
     <PackageId>bam</PackageId>
-    <Version>1.0.6-c5ce584</Version>
+    <Version>1.0.6</Version>
     <Authors>Bryan Apellanes</Authors>
     <Company>ThreeHeadz</Company>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>

@@ -19,7 +19,7 @@ namespace Bam.Net.Application
     [Serializable]
     public class ExternalProvider: CommandLineTool
     {
-        [ArgZero("menu")]
+/*        [ArgZero("menu")]
         public void Menu()
         {
             FileInfo file = typeof(Bam.Net.Adhoc.Adhoc).Assembly.GetFileInfo();
@@ -32,6 +32,6 @@ namespace Bam.Net.Application
             FileInfo assemblyFile = new FileInfo(assemblyPath);
             ShowMenu(Assembly.LoadFile(assemblyFile.FullName), new ConsoleMenu[]{}, assemblyPath);
             Exit(0);
-        }
+        }*/
     }
 }

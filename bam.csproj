@@ -5,21 +5,18 @@
     <ApplicationIcon>bam.ico</ApplicationIcon>
     <StartupObject>Bam.Net.Program</StartupObject>
     <PackageId>bam</PackageId>
-    <Version>1.0.5-test+f522702</Version>
+    <Version>1.0.6</Version>
     <Authors>Bryan Apellanes</Authors>
     <Company>ThreeHeadz</Company>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <NuspecFile>bam.nuspec</NuspecFile>
-    <IntermediatePackDir>$(MSBuildProjectDirectory)/bin/$(Configuration)/</IntermediatePackDir>
+    <IntermediatePackDir>/opt/bam/build/$(Configuration)/$(MSBuildThisFileName)/</IntermediatePackDir>
     <PublishDir>$(IntermediatePackDir)$(TargetFramework)/</PublishDir>
     <NuspecProperties>publishDir=$([MSBuild]::NormalizeDirectory($(IntermediatePackDir)))</NuspecProperties>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>\opt\bam\build\debug\bam\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <OutputPath>\opt\bam\build\release\bam\</OutputPath>
+  <PropertyGroup>
+    <OutputPath>\opt\bam\build\$(Configuration)\$(MSBuildThisFileName)\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <None Update="BamSettings-Windows.yaml">
@@ -271,12 +268,15 @@
     <Clean Remove="obj\Debug\netcoreapp2.2\win10-x64\\TempCA\bam.dll" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="bam.net.core" Version="1.0.6" />
+    <PackageReference Include="bam.net.data.dynamic" Version="1.0.6" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Bam.Net\_lib\bam.net.core\bam.net.core.csproj" />
     <ProjectReference Include="..\..\..\Bam.Net\_lib\bam.net.data.dynamic\bam.net.data.dynamic.csproj" />
     <ProjectReference Include="..\..\..\BamAppServices\_tools\bambot\bambot.csproj" />
+    <Folder Include="Shell\" />
   </ItemGroup>
   <Target Name="PublishAll" BeforeTargets="GenerateNuspec">
     <ItemGroup>

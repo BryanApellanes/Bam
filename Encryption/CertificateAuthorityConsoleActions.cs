@@ -22,14 +22,15 @@ namespace Bam.Encryption
     public class CertificateAuthorityConsoleActions : CommandLineTool
     {
         [ConsoleAction("Generate a self signed certificate usable as a certificate authority root certificate")]
-        public void GenerateSelfSignedCertificate()
+        public void GenerateRootCertificate()
         {
             string subjectName = GetArgument("subjectName");
             int validForYears = GetArgumentOrDefault("validForYears", "2").ToInt(2);
-            string signatureAlgorithm = GetArgumentOrDefault("signatureAlgorithm", "SHA512WITHRSA");
-            string certificateFile = GetArgumentOrDefault("certificateFile", "./selfsignedx509.cer");
+            //string certificateFile = GetArgumentOrDefault("certificateFile", "./selfsignedx509.cer");
 
-            Org.BouncyCastle.X509.X509Certificate certificate = X509.GenerateSelfSignedCertificate(subjectName, validForYears, signatureAlgorithm);
+            X509CertificateDetails certificateDetails = X509.GenerateRootCertificate(subjectName, validForYears, "SHA512WITHRSA");
+
+            //Org.BouncyCastle.X509.X509Certificate certificate = X509.GenerateRootCertificate(subjectName, validForYears, signatureAlgorithm).Certificate;
 
             
         }

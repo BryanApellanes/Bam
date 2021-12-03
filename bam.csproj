@@ -5,18 +5,20 @@
     <ApplicationIcon>bam.ico</ApplicationIcon>
     <StartupObject>Bam.Net.Program</StartupObject>
     <PackageId>bam</PackageId>
-    <Version>1.0.6</Version>
+    <Version>2.0.0</Version>
     <Authors>Bryan Apellanes</Authors>
     <Company>ThreeHeadz</Company>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <NuspecFile>bam.nuspec</NuspecFile>
-    <IntermediatePackDir>/opt/bam/build/$(Configuration)/$(MSBuildThisFileName)/</IntermediatePackDir>
+    <IntermediatePackDir Condition=" '$(OS)' == 'Windows_NT' ">$(HOMEDRIVE)$(HOMEPATH)/.bam/build/pack/$(Configuration)/$(MSBuildThisFileName)/</IntermediatePackDir>
+    <IntermediatePackDir Condition=" '$(OS)' == 'UNIX' ">$(HOME)/.bam/build/pack/$(Configuration)/$(MSBuildThisFileName)/</IntermediatePackDir>
     <PublishDir>$(IntermediatePackDir)$(TargetFramework)/</PublishDir>
     <NuspecProperties>publishDir=$([MSBuild]::NormalizeDirectory($(IntermediatePackDir)))</NuspecProperties>
   </PropertyGroup>
   <PropertyGroup>
-    <OutputPath>\opt\bam\build\$(Configuration)\$(MSBuildThisFileName)\</OutputPath>
+    <OutputPath Condition=" '$(OS)' == 'Windows_NT' ">$(HOMEDRIVE)$(HOMEPATH)\.bam\build\$(Configuration)\$(MSBuildThisFileName)\</OutputPath>
+    <OutputPath Condition=" '$(OS)' == 'UNIX' ">$(HOME)\.bam\build\$(Configuration)\$(MSBuildThisFileName)\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <None Update="BamSettings-Windows.yaml">
@@ -268,19 +270,14 @@
     <Clean Remove="obj\Debug\netcoreapp2.2\win10-x64\\TempCA\bam.dll" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="bam.net.core" Version="1.0.6" />
-    <PackageReference Include="bam.net.data.dynamic" Version="1.0.6" />
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Bam.Net\_lib\bam.net.data.dynamic\bam.net.data.dynamic.csproj" />
-    <ProjectReference Include="..\..\..\BamAppServices\_tools\bambot\bambot.csproj" />
     <Folder Include="Shell\" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="bam.net.core">
-      <HintPath>C:\opt\bam\build\Debug\bam.net.core\net5.0\ref\bam.net.core.dll</HintPath>
-    </Reference>
+    <ProjectReference Include="..\Bam.Core\bam.core\bam.core.csproj" />
+    <ProjectReference Include="..\Bam.Net.Data.Dynamic\bam.net.data.dynamic.csproj" />
   </ItemGroup>
   <Target Name="PublishAll" BeforeTargets="GenerateNuspec">
     <ItemGroup>

@@ -7,7 +7,7 @@
     <PackageId>bam</PackageId>
     <Version>2.0.0</Version>
     <Authors>Bryan Apellanes</Authors>
-    <Company>ThreeHeadz</Company>
+    <Company>Three Headz</Company>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <NoPackageAnalysis>true</NoPackageAnalysis>
     <NuspecFile>bam.nuspec</NuspecFile>

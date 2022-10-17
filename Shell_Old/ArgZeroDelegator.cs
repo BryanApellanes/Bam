@@ -6,7 +6,7 @@ using Bam.Shell;
 
 namespace Bam.Shell
 {
-    public class ArgZeroDelegator<T> : ArgZeroDelegator  // TODO: consider deleting this concept for unnecessary complexity
+    public class ArgZeroDelegator<T> : ArgZeroDelegator  // TODO: Delete this concept for unecessary complexity; replace with a class method call model: {app}.exe className methodName /args:{QueryStringFormattedArgs}
     {
         public virtual T Construct()
         {

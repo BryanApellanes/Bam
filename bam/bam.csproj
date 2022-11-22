@@ -283,6 +283,10 @@
     <Folder Include="Encryption\Examples\" />
     <Folder Include="Shell\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\submodules\bam.core\bam.core\bam.core.csproj" />
+    <ProjectReference Include="..\submodules\bam.net.data.dynamic\bam.net.data.dynamic.csproj" />
+  </ItemGroup>
   <Target Name="PublishAll" BeforeTargets="GenerateNuspec">
     <ItemGroup>
       <_TargetFramework Include="$(TargetFrameworks)" />

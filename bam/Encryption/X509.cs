@@ -83,7 +83,7 @@ namespace Bam.Encryption
             certificateGenerator.SetNotBefore(notBefore);
             certificateGenerator.SetNotAfter(notAfter);
 
-            AsymmetricCipherKeyPair subjectKeyPair = RsaKeyGen.GenerateKeyPair(rsaKeyLength);
+            AsymmetricCipherKeyPair subjectKeyPair = Rsa.GenerateKeyPair(rsaKeyLength);
             certificateGenerator.SetPublicKey(subjectKeyPair.Public);
 
             ISignatureFactory signatureFactory = new Asn1SignatureFactory(signatureAlgorithm, issuerPrivateKeyForSigning, random);
@@ -170,7 +170,7 @@ namespace Bam.Encryption
             certificateGenerator.SetNotBefore(notBefore);
             certificateGenerator.SetNotAfter(notAfter);
 
-            AsymmetricCipherKeyPair subjectKeyPair = RsaKeyGen.GenerateKeyPair(rsaKeyLength);
+            AsymmetricCipherKeyPair subjectKeyPair = Rsa.GenerateKeyPair(rsaKeyLength);
             certificateGenerator.SetPublicKey(subjectKeyPair.Public);
 
             AsymmetricCipherKeyPair issuerKeyPair = subjectKeyPair;

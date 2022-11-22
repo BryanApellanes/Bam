@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Bam.Encryption
@@ -47,7 +48,7 @@ namespace Bam.Encryption
         /// <summary>
         /// Gets the Bouncy Castle compatible certifcate.
         /// </summary>
-        protected Org.BouncyCastle.X509.X509Certificate Certificate { get; private set; }
+        public Org.BouncyCastle.X509.X509Certificate Certificate { get; private set; }
 
         X509Certificate2 _certificate2;
         /// <summary>
@@ -86,6 +87,7 @@ namespace Bam.Encryption
 
         public X509CertificateDescriptor Save(IRepository repository)
         {
+            throw new NotImplementedException();
             X509CertificateDescriptor certificateDescriptor = new X509CertificateDescriptor
             {
                 

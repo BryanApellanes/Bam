@@ -103,7 +103,7 @@ namespace Bam.Shell.Users
             edited.Id = user.Id;
             edited.Uuid = user.Uuid;
             edited.Cuid = user.Cuid;
-            edited.Save(GetUserDb());
+            edited.Save(GetUserDatabase());
             File.Delete(fileName);
         }
 

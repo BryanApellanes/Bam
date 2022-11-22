@@ -36,7 +36,7 @@ namespace Bam.Shell.Users
             {
                 Name = roleName
             };
-            role.Save(GetUserDb());
+            role.Save(GetUserDatabase());
 
             output("*** role added ***");
             output(role.ToYaml());

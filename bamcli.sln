@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "submodules", "submodules", "{6D47E2AC-A018-4D10-A443-BE038A97CAE8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bam", "bam\bam.csproj", "{55CF0F01-1859-418A-8B20-D720D580314E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bam.net.data.dynamic", "submodules\bam.net.data.dynamic\bam.net.data.dynamic.csproj", "{49CEE272-1372-4675-9591-91300948644D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bam.core", "submodules\bam.core\bam.core\bam.core.csproj", "{7104C4A6-46CB-47E4-A691-5D97C40CF6EE}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "bam.net.shared", "submodules\bam.core\submodules\bam.net.shared\bam.net.shared.shproj", "{8F2CB78E-8C2E-45C6-97A0-C38F60A85E98}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{55CF0F01-1859-418A-8B20-D720D580314E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55CF0F01-1859-418A-8B20-D720D580314E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55CF0F01-1859-418A-8B20-D720D580314E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55CF0F01-1859-418A-8B20-D720D580314E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49CEE272-1372-4675-9591-91300948644D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49CEE272-1372-4675-9591-91300948644D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49CEE272-1372-4675-9591-91300948644D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49CEE272-1372-4675-9591-91300948644D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7104C4A6-46CB-47E4-A691-5D97C40CF6EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7104C4A6-46CB-47E4-A691-5D97C40CF6EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7104C4A6-46CB-47E4-A691-5D97C40CF6EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7104C4A6-46CB-47E4-A691-5D97C40CF6EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{49CEE272-1372-4675-9591-91300948644D} = {6D47E2AC-A018-4D10-A443-BE038A97CAE8}
+		{7104C4A6-46CB-47E4-A691-5D97C40CF6EE} = {6D47E2AC-A018-4D10-A443-BE038A97CAE8}
+		{8F2CB78E-8C2E-45C6-97A0-C38F60A85E98} = {6D47E2AC-A018-4D10-A443-BE038A97CAE8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B5747AF8-599F-4E26-BF9A-3EE3D7C2766F}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		submodules\bam.core\submodules\bam.net.shared\bam.net.shared.projitems*{7104c4a6-46cb-47e4-a691-5d97c40cf6ee}*SharedItemsImports = 5
+		submodules\bam.core\submodules\bam.net.shared\bam.net.shared.projitems*{8f2cb78e-8c2e-45c6-97a0-c38f60a85e98}*SharedItemsImports = 13
+	EndGlobalSection
+EndGlobal

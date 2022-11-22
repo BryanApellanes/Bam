@@ -1,3 +1,9 @@
 [submodule "npm/bam_js"]
 	path = npm/bam_js
 	url = git@github.com:BryanApellanes/bam.js.git
+[submodule "submodules/bam.net.data.dynamic"]
+	path = submodules/bam.net.data.dynamic
+	url = https://github.com/BryanApellanes/Bam.Net.Data.Dynamic.git
+[submodule "submodules/bam.core"]
+	path = submodules/bam.core
+	url = https://github.com/BryanApellanes/bam.core.git

@@ -21,6 +21,11 @@
     <OutputPath Condition=" '$(OS)' == 'UNIX' ">$(HOME)\.bam\build\$(Configuration)\$(MSBuildThisFileName)\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="submodules\**" />
+    <EmbeddedResource Remove="submodules\**" />
+    <None Remove="submodules\**" />
+  </ItemGroup>
+  <ItemGroup>
     <None Update="BamSettings-Windows.yaml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -277,10 +282,6 @@
   <ItemGroup>
     <Folder Include="Encryption\Examples\" />
     <Folder Include="Shell\" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Bam.Core\bam.core\bam.core.csproj" />
-    <ProjectReference Include="..\Bam.Net.Data.Dynamic\bam.net.data.dynamic.csproj" />
   </ItemGroup>
   <Target Name="PublishAll" BeforeTargets="GenerateNuspec">
     <ItemGroup>

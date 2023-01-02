@@ -33,8 +33,8 @@ namespace Bam.Net
         public static void AddArguments()
         {
             AddSwitches(typeof(Bam.Shell.LifeCycleProvider));
-            AddSwitches(typeof(Bam.Encryption.CertificateAuthorityConsoleActions));
-            Bam.Encryption.Arguments.Add();
+            /*AddSwitches(typeof(Bam.Encryption.CertificateAuthorityConsoleActions));
+            Bam.Encryption.Arguments.Add();*/
 
             AddValidArgument("config", "The path to a config file to use");
             AddValidArgument("schemaName", false, addAcronym: true, description: "The name to use for the generated schema");

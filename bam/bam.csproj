@@ -280,9 +280,6 @@
     <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Console" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\submodules\bam.core\bam.core\bam.core.csproj" />
     <ProjectReference Include="..\submodules\bam.net.data.dynamic\bam.net.data.dynamic.csproj" />
   </ItemGroup>
